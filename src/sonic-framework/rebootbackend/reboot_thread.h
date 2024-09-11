@@ -36,7 +36,7 @@ class ThreadStatus {
     // Number of reboots since active.
     m_proto_status.set_count(0);
 
-    // RebootMethod is type of of reboot: cold, nsf, warm, fast from a
+    // RebootMethod is type of of reboot: cold, halt, nsf, warm, fast from a
     // RebootRequest
     m_proto_status.set_method(gnoi::system::RebootMethod::UNKNOWN);
 
@@ -169,6 +169,7 @@ class RebootThread {
   Progress nsf_reboot_helper(swss::Select &s);
   void do_nsf_reboot(swss::Select &s);
   void do_cold_reboot(swss::Select &s);
+  void do_halt_reboot(swss::Select &s);
 
   // Inner loop select handler to wait for platform reboot.
   //   wait for timeout

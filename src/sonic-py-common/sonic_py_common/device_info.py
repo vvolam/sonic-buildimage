@@ -958,7 +958,6 @@ def get_dpu_info():
     return {}
 
 
-
 def get_num_dpus():
     """
     Retrieves the number of DPUs from platform.json file.
@@ -970,7 +969,7 @@ def get_num_dpus():
     """
 
     dpu_info = get_dpu_info()
-    if dpu_info is not None and len(DPUs) > 0:
-        return len(DPUs)
+    if dpu_info is not None and len(dpu_info) > 0:
+        return len(dpu_info)
 
     return 0

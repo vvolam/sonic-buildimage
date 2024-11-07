@@ -950,9 +950,9 @@ def get_dpu_info():
     # Retrieve platform.json data
     platform_data = get_platform_json_data()
     if platform_data:
-        # Convert to lower case avoid case sensitive.
+        # Convert keys to lower case to avoid case sensitivity.
         data = {k.lower(): v for k, v in platform_data.items()}
-        dpu_info = data.get('dpus', None)
+        dpu_info = data.get('dpus', {})
         return dpu_info
 
     return {}
@@ -961,8 +961,6 @@ def get_dpu_info():
 def get_num_dpus():
     """
     Retrieves the number of DPUs from platform.json file.
-
-    Args:
 
     Returns:
         A integer to indicate the number of DPUs.
@@ -973,3 +971,18 @@ def get_num_dpus():
         return len(dpu_info)
 
     return 0
+
+
+def get_dpu_list():
+    """
+    Retrieves the list of DPUs from platform.json file.
+
+    Returns:
+        A list indicating the list of DPUs.
+    """
+
+    dpu_info = get_dpu_info()
+    if dpu_info is not None and len(dpu_info) > 0:
+        return list(dpu_info)
+
+    return []

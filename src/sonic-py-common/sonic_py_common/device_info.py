@@ -982,6 +982,7 @@ def get_dpu_list():
 
     Returns:
         A list indicating the list of DPUs.
+        For example, ['dpu0', 'dpu1', 'dpu2']
     """
 
     if is_dpu():

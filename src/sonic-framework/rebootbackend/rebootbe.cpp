@@ -14,6 +14,7 @@
 #include "reboot_interfaces.h"
 #include "select.h"
 #include "status_code_util.h"
+#include "warm_restart.h"
 
 namespace rebootbackend {
 
@@ -46,6 +47,12 @@ void RebootBE::Start() {
   s.addSelectable(&m_NotificationConsumer);
   s.addSelectable(&m_Done);
   s.addSelectable(&m_RebootThreadFinished);
+
+  if (swss::WarmStart::isWarmStart()) {
+    SetCurrentStatus(RebManagerStatus::WARM_INIT_WAIT);
+  } else {
+    SWSS_LOG_NOTICE("Warm restart not enabled");
+  }
 
   SWSS_LOG_NOTICE("RebootBE entering operational loop");
   while (true) {

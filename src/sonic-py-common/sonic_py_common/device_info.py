@@ -630,7 +630,7 @@ def is_dpu():
     # Retrieve platform.json data
     platform_data = get_platform_json_data()
     if platform_data:
-        return "DPU" in platform_data
+        return 'DPU' in platform_data
 
     return False
 
@@ -956,6 +956,8 @@ def get_dpu_info():
         return platform_data["DPUS"]
     elif 'DPU' in platform_data:
         return platform_data['DPU']
+    else:
+        return {}
 
 
 def get_num_dpus():

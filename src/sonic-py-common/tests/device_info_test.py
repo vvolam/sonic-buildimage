@@ -249,6 +249,10 @@ class TestDeviceInfo(object):
         mock_get_platform_json_data.return_value={"DPU": {}}
         assert device_info.is_dpu() == True
 
+        # Test case where platform is a smart switch and DPU data is present in platform.json
+        mock_get_platform_json_data.return_value={"DPUS": {}}
+        assert device_info.is_dpu() == False
+
     @mock.patch("sonic_py_common.device_info.get_platform_json_data")
     @mock.patch("sonic_py_common.device_info.get_platform")
     def test_get_dpu_info(self, mock_get_platform, mock_get_platform_json_data):
@@ -272,6 +276,10 @@ class TestDeviceInfo(object):
         # Test case where platform.json data contains "DPU"
         mock_get_platform_json_data.return_value = {"DPU": {"dpu0": {}}}
         assert device_info.get_dpu_info() == {"dpu0": {}}
+
+        # Test case where platform.json data does not contain "DPU" or "DPUS"
+        mock_get_platform_json_data.return_value = {"chassis": {}}
+        assert device_info.get_dpu_info() == {}
 
     @mock.patch("sonic_py_common.device_info.get_platform_json_data")
     @mock.patch("sonic_py_common.device_info.is_dpu")

@@ -94,29 +94,24 @@ module sonic-smart-switch {
 
 				leaf PORT_NAME {
 					description "Name of the DPU port";
-					type string;
+					type string {
+						pattern "[a-z]+[0-9]+";
+					}
 				}
 
 				leaf state {
 					description "Admin state of DPU device";
-					type enumeration {
-						enum up {
-							description "Admin state is up";
-						}
-						enum down {
-							description "Admin state is down";
-						}
-					}
+					type stypes:admin_status;
 				}
 
 				leaf vip_ipv4 {
 					description "VIP IPv4 address from minigraph";
-					type inet:ipv4-prefix;
+					type inet:ipv4-address;
 				}
 
 				leaf vip_ipv6 {
 					description "VIP IPv6 address from minigraph";
-					type inet:ipv6-prefix;
+					type inet:ipv6-address;
 				}
 
 				leaf pa_ipv4 {
@@ -134,7 +129,7 @@ module sonic-smart-switch {
 					type string;
 				}
 
-				leaf gnmi {
+				leaf gnmi_port {
 					description "Port gNMI runs on.";
 					type inet:port-number;
 				}

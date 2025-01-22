@@ -95,7 +95,7 @@ module sonic-smart-switch {
 				leaf PORT_NAME {
 					description "Name of the DPU port";
 					type string {
-						pattern "[a-z]+[0-9]+";
+						pattern "[a-zA-Z]+[0-9]+";
 					}
 				}
 

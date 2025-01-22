@@ -112,7 +112,7 @@ class TestSmartSwitch:
     @pytest.mark.parametrize(
         "port_name, error_message", [
             ("port0", None),
-            ("Port0", 'Value "Port0" does not satisfy the constraint "[a-z]+[0-9]+"')]
+            ("Po0rt0", 'Value "Po0rt0" does not satisfy the constraint "[a-zA-Z]+[0-9]+"')]
         )
     def test_dpu_port_name(self, yang_model, port_name, error_message):
         data = {
